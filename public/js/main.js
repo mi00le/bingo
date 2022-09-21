@@ -11,6 +11,7 @@ class Bingo {
     this.numbers = [];
     this.max_num = 75;
     this.btns = Array.from(document.querySelectorAll(".item-btn"));
+    this.display_num = document.querySelector(".num");
     this.flag = false;
     this.bingo_numbers = [];
     this.new_number = true;
@@ -21,6 +22,8 @@ class Bingo {
       if (this.new_number) {
         this.bingo_numbers.push(data);
         console.log(this.bingo_numbers);
+        this.display_num.innerHTML = this.bingo_numbers;
+
         this.new_number = false;
         this.check_if_number_exist(data);
       }
