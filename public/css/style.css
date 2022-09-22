@@ -57,21 +57,32 @@ div {
 
 .logo-container {
   display: none;
-  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  align-items: center;
   width: 100vw;
   text-align: center;
   height: 5vh;
   background-color: black;
   /* outline: 3px solid #000000; */
 }
-
-.logo-container > img {
-  /* width: inherit; */
-  height: 5vh;
-}
 .logo-container > div {
   color: white;
   line-height: 20px;
+  /* padding-left: 10%; */
+}
+
+.logo-container > img {
+  /* width: 100vw; */
+  height: 5vh;
+  padding-right: 10%;
+  /* padding-left: 10%; */
+
+  /* padding-left: auto; */
+}
+#current-num-on-display {
+  color: white;
+  /* line-height: 20px; */
+  /* padding-right: 10%; */
 }
 
 .grid-container {

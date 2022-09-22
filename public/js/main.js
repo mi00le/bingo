@@ -12,20 +12,22 @@ class Bingo {
     this.max_num = 75;
     this.btns = Array.from(document.querySelectorAll(".item-btn"));
     this.display_num = document.querySelector(".num");
+    this.display_username = document.querySelector("#display-username");
     this.flag = false;
     this.bingo_numbers = [];
     this.new_number = true;
+    this.current_num = 0;
   }
 
   toggle_fade_num() {
     let container = document.querySelector(".bingo-num-container");
     let bingo_num = document.querySelector(".bingo-num");
-
     setTimeout(() => {
       bingo_num.classList.toggle("fade");
     }, 3000);
     setTimeout(() => {
       container.style.display = "none";
+      // display_username;
       // bingo_num_container.style.display = "none"
     }, 4000);
 
@@ -34,8 +36,15 @@ class Bingo {
     //   bingo_num.classList.toggle("fade");
     // }, 6000);
   }
+  show_info() {
+    this.display_username.innerHTML = localStorage.getItem("username");
+    console.log(this.bingo_numbers.length);
 
-  get_number_from_server() {
+    document.querySelector("#current-num-on-display").innerHTML =
+      this.current_num;
+  }
+
+  get_from_server() {
     socket.on("number", (data) => {
       if (this.new_number) {
         this.bingo_numbers.push(data);
@@ -83,7 +92,9 @@ class Bingo {
 
   init() {
     this.save_numbers();
-    this.get_number_from_server();
+    this.get_from_server();
+
+    this.show_info();
     document.querySelector(".bingo-btn").addEventListener(
       "click",
       () => {
@@ -230,7 +241,7 @@ document.body.onload = () => {
 
 let toggle_visible = () => {
   document.querySelector(".grid-container").style.display = "grid";
-  document.querySelector(".logo-container").style.display = "grid";
+  document.querySelector(".logo-container").style.display = "flex";
   document.querySelector(".bingo-container").style.display = "grid";
   document.querySelector(".info-container").style.display = "none";
 };
@@ -248,7 +259,6 @@ document.querySelector("#username-btn").addEventListener("click", () => {
   } else {
     alert("username can only contain letters & numbers");
   }
-  console.log(username);
 });
 
 /* document
