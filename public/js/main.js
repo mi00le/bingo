@@ -17,13 +17,31 @@ class Bingo {
     this.new_number = true;
   }
 
+  toggle_fade_num() {
+    let container = document.querySelector(".bingo-num-container");
+    let bingo_num = document.querySelector(".bingo-num");
+
+    setTimeout(() => {
+      bingo_num.classList.toggle("fade");
+    }, 3000);
+    setTimeout(() => {
+      container.style.display = "none";
+      // bingo_num_container.style.display = "none"
+    }, 4000);
+
+    // setTimeout(() => {
+    //   let bingo_num = document.querySelector(".bingo-num");
+    //   bingo_num.classList.toggle("fade");
+    // }, 6000);
+  }
+
   get_number_from_server() {
     socket.on("number", (data) => {
       if (this.new_number) {
         this.bingo_numbers.push(data);
         console.log(this.bingo_numbers);
         this.display_num.innerHTML = this.bingo_numbers;
-
+        this.toggle_fade_num();
         this.new_number = false;
         this.check_if_number_exist(data);
       }
@@ -212,7 +230,7 @@ document.body.onload = () => {
 
 let toggle_visible = () => {
   document.querySelector(".grid-container").style.display = "grid";
-  document.querySelector(".container").style.display = "grid";
+  document.querySelector(".logo-container").style.display = "grid";
   document.querySelector(".bingo-container").style.display = "grid";
   document.querySelector(".info-container").style.display = "none";
 };
