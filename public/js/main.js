@@ -28,21 +28,11 @@ class Bingo {
         }, 3000);
         setTimeout(() => {
             container.style.display = "none";
-            // display_username;
-            // bingo_num_container.style.display = "none"
             this.num_placeholder.innerHTML = this.bingo_numbers;
         }, 3300);
-
-        // setTimeout(() => {
-        //   let bingo_num = document.querySelector(".bingo-num");
-        //   bingo_num.classList.toggle("fade");
-        // }, 6000);
     }
     show_info() {
         this.display_username.innerHTML = localStorage.getItem("username");
-        // console.log(this.bingo_numbers.length);
-
-        // document.querySelector("#current-num-on-display").innerHTML = this.current_num;
     }
 
     get_from_server() {
@@ -80,7 +70,6 @@ class Bingo {
             }
             localStorage.setItem("grid", JSON.stringify(store_this_arr));
         } else {
-            //--------------------------------------------------//
             let t = JSON.parse(localStorage.getItem("grid"));
             for (let i = 0; i < this.btns.length; i++) {
                 this.btns[i].addEventListener("click", this.handle_btn, false);
@@ -95,7 +84,10 @@ class Bingo {
         this.save_numbers();
         this.get_from_server();
 
-        this.show_info();
+        setTimeout(() => {
+            this.show_info();
+        }, 1000);
+
         document.querySelector(".bingo-btn").addEventListener(
             "click",
             () => {
@@ -144,13 +136,15 @@ class Bingo {
                     }
                 }
 
-                this.grid[0][4].getAttribute("toggled") == "true" &&
-                this.grid[1][3].getAttribute("toggled") == "true" &&
-                this.grid[2][2].getAttribute("toggled") == "true" &&
-                this.grid[3][1].getAttribute("toggled") == "true" &&
-                this.grid[4][0].getAttribute("toggled") == "true"
-                    ? console.log("Diagonal", "Bingo")
-                    : null;
+                if (this.grid.length > 0) {
+                    this.grid[0][4].getAttribute("toggled") == "true" &&
+                    this.grid[1][3].getAttribute("toggled") == "true" &&
+                    this.grid[2][2].getAttribute("toggled") == "true" &&
+                    this.grid[3][1].getAttribute("toggled") == "true" &&
+                    this.grid[4][0].getAttribute("toggled") == "true"
+                        ? console.log("Diagonal", "Bingo")
+                        : null;
+                }
             },
             false
         );

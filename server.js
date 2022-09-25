@@ -43,14 +43,19 @@ let users = [];
 io.on("connection", (socket) => {
     socket.join("room1");
 
-    socket.on("set-username", function (nickname) {
-        socket.nickname = nickname;
-        users.push(socket.nickname);
-        console.log("hello", nickname);
-    });
+    setTimeout(() => {
+        socket.on("set-username", function (nickname) {
+            socket.nickname = nickname;
+            users.push([socket.nickname, socket.id]);
+            console.log("hello", nickname);
+            // console.log(users[0]);
+        });
+    }, 1000);
 
     // let inter = setInterval(() => {
-    socket.emit("number", numbers[0]);
+    setTimeout(() => {
+        socket.emit("number", numbers[0]);
+    }, 1000);
 
     // }, 10000);
 
